@@ -19,8 +19,10 @@ async def filter_mywin_media(update: Update, context: ContextTypes.DEFAULT_TYPE)
     message = update.message
 
     if (message.photo or message.video) and message.caption:
-        if message.caption.lower().startswith("#mywin"):
+        caption = message.caption.lower().strip()  # define caption first
+        if caption.startswith("#mywin") or caption.startswith("#comebackisreal"):
             return  # Valid message
+
     await message.delete()
 
 def run_flask():
@@ -35,3 +37,4 @@ def run_telegram():
 if __name__ == "__main__":
     Thread(target=run_flask).start()
     Thread(target=run_telegram).start()
+
